@@ -1,5 +1,31 @@
 #include "libasm.h"
 
+void	check_strlen(char* str)
+{
+	printf("Real strlen: %d\n", (int) strlen(str));
+	printf("ASM strlen: %d\n\n", (int) ft_strlen(str));
+}
+
+void	check_strcpy(char* s1, char* s2)
+{
+	printf("Str2 before strcpy: %s\n", s2);
+	ft_strcpy(s2, s1);
+	printf("Str2 after strcpy: %s\n\n", s2);
+}
+
+void	check_strcmp(char* s1, char* s2)
+{
+	ft_strcpy(s2, s1);
+
+	printf("Real strcmp: %d\n", strcmp(s1, s2));
+	printf("ASM strcmp: %d\n", ft_strcmp(s1, s2));
+
+	s2[2] = 'a';
+
+	printf("Real strcmp: %d\n", strcmp(s1, s2));
+	printf("ASM strcmp: %d\n\n", ft_strcmp(s1, s2));
+}
+
 void	check_read(char* filename)
 {
 	int		fd;
@@ -21,14 +47,11 @@ int main(void)
 	char*	filename = "test_file";
 	char	*dest_strdup = NULL;
 
-	printf("Strlen: %d\n\n", (int) ft_strlen(test));
+	check_strlen(test);
 
-	ft_strcpy(test_cpy, test);
-	printf("Strcpy: %s\n", test_cpy);
+	check_strcpy(test, test_cpy);
 
-	printf("Strcmp: %d\n", ft_strcmp(test, test_cpy));
-	test_cpy[2] = 'a';
-	printf("Strcmp: %d\n\n", ft_strcmp(test, test_cpy));
+	check_strcmp(test, test_cpy);
 
 	ft_write(1, "Hello world!\n\n", 15);
 
